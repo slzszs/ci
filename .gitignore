@@ -1,7 +1,9 @@
 #################
 ## Eclipse
 #################
-
+#ignore these files
+*.dll
+temp/*
 *.pydevproject
 .project
 .metadata
