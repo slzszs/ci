@@ -15,4 +15,11 @@ class User_model extends CI_Model {
         }
         return $return;
     }
+    
+    public function insertUserLoginLog($loginLog) {
+        if($loginLog) {
+            return $this->db->insert('user_login_log', $loginLog);
+        }
+        return false;
+    }
 }

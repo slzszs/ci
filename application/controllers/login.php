@@ -3,7 +3,7 @@
 class Login extends CI_Controller {
 
     private $session_var = 'sessionnum';
-
+    private $session_userInfo = 'userInfo';
     public function __construct() {
         parent::__construct();
     }
@@ -12,7 +12,9 @@ class Login extends CI_Controller {
         $helperArr = array('url');
         $this->load->helper($helperArr);
         $data['img'] = $this->getCaptha();
+        $this->load->view('comm/header');
         $this->load->view('login', $data);
+        $this->load->view('comm/footer');
     }
 
     public function doLogin() {
@@ -43,6 +45,14 @@ class Login extends CI_Controller {
         else if(!$userInfo['user_status']) {
             return $this->err_message->_output(158);
         } else {
+            $this->load->library('util');
+            $loginLog = array(
+                        'user_id' => $userInfo['user_id'],
+                        'login_ip' => util::get_client_ip(),
+                        'login_date' => time()
+                         );
+            $this->user_model->insertUserLoginLog($loginLog);
+            $this->session->set_userdata($this->session_userInfo, $userInfo);
             return $this->err_message->_output(200);
         }
     }
