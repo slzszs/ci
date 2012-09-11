@@ -85,7 +85,7 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
 					
 					<h3>登录</h3>
 
-					<form id="loginform" method="post" action="<?= base_url()?>index.php/login/doLogin">
+					
 
 						<p>
 							<label class="required" for="username">用户名:</label><br/>
@@ -100,9 +100,10 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
                                                 
                                                 <p> 
                                                         <label class="required" for="captha">验证码:</label><br/>                                                        
-							<input type="input" id="remember" class="full" value="" name="captha"/>
-                                                        <a href="javascript:void(0)"><?= $img;?></a>
+							<input type="input" id="captcha" class="full" value="" name="captha" style='width:100px'/>
+                                                        <span style="cursor:pointer; margin-top: -10px" onclick="getNewCaptcha();" id="captha_span"><?= $img;?></span>
 						</p>
+                                                <div class="box box-info" id="captha_err" style="display:none" ></div>
 						<!--
 						<p>
 							<input type="checkbox" id="remember" class="" value="1" name="remember"/>
@@ -115,7 +116,7 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
                                                 
 						<div class="clear">&nbsp;</div>
 
-					</form>
+					
 					
 					<form id="emailform" style="display:none" method="post" action="#">
 						<div class="box">
@@ -144,96 +145,68 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
 		</div>
 	</footer>
 <script type="text/javascript">
+    
+    function getNewCaptcha() {
+            $.get("<?= base_url()?>index.php/login/getCaptha/1", function(result){
+                $('#captha_span').html(result);
+            });
+        }
+        
     $("#submit_login").click(function() {
             var passStatus = CKECK.check_password();
             var userStatus = CKECK.check_username();
-            var captcha = CKECK.check_captcha();
-            if(passStatus.status && userStatus.status && captcha.status) {
-                var user = $(farClass+' .pop_login_user').attr('value');
-                var pass = $(farClass+' .pop_login_pass').attr('value'); 
-                var remeber_me = $(farClass+' .remeber_me').is(":checked") ? 1 : 0; 
-                var postArr ;
-                var captcha_inp = $(farClass+' .pop_login_captcha').attr('value'); 
-                postArr = {'user' : user, 'pass' : pass, 'remeber_me' : remeber_me,'captcha_inp' : captcha_inp};
-                $.post("login.php?doLogin=1&mt="+Math.random(),postArr,function(result){
+            var captchaStatus = CKECK.check_captcha();
+            clearError();
+            if(passStatus.status && userStatus.status && captchaStatus.status) {
+                var user = $("#username").attr('value'); 
+                var pass = $("#password").attr('value');
+                var captcha = $('#captcha').attr('value'); 
+                var postArr = {'user' : user, 'pass' : pass, 'captcha' : captcha};
+                $.post("<?= base_url()?>index.php/login/doLogin/"+Math.random(),postArr,function(result){
                     var code = result.code;
                     var message = result.message;
-                    clearError();
-                    if(code == 799) {
-                        //var backUrl = result.data.backUrl;
-                        // console.log(backUrl);
-                        window.location.href = loginRurl;
-                        return false;
+                    if(code != 200) {
+                        getNewCaptcha();
                     }
-                    var errorNum = result.data.errorNum;
-                    if(errorNum > 3) {
-                        if(! $(farClass+' .pop_login_captcha')[0]) {
-                            var appHtml = '<li class="dt">验证码：</li>\n\
-                                                <li class="dd inp ">\n\
-                                                <input type="text" style="width:100px;" name="captcha_inp" id="captcha_inp" class="pop_login_captcha" >\n\
-                                                <span class="log_code_img"><span id="captcha_span"><img src="captcha.php" id="captcha_img" class="captcha_img" /></span>\n\
-                                                <a style="text-decoration:none;cursor: pointer;"  onclick = "newPopObj.getCaptcha();">换一张</a></span>\n\
-                                                <p class="info_ps ps_error captcha_error">请输入验证码</p></li>';
-                            $(farClass+' .login_ul').append(appHtml);
-                        } else {
-                            newPopObj.getCaptcha();
-                                
-                        }
+                    if(code == 151 || code == 156 || code == 158) {
+                        ERRORSHOW.common_error($('#user_err'), message);
                     }
-                        
-                    if (code == 751) {
-                        var objId = $(farClass+' .pop_login_user');
-                    }else if (code == 752 || code == 756) {
-                        var objId = $(farClass+' .pop_login_pass');
-                        $(farClass+' .pop_login_pass').attr('value','');
+                    else if(code == 152) {
+                        $("#password").attr('value', '');
+                        ERRORSHOW.common_error($('#pass_err'), message);
                     }
-                    if(code == 753) {
-                        var objId = $(farClass+' .pop_login_user');
-                        message = "用户名不存在，<a style='cursor: pointer;color:#FF6699;' onclick='popClose()' >快速注册</a>";
+                    else if(code == 154 || code == 155) {
+                        ERRORSHOW.common_error($('#captha_err'), message);
                     }
-                        
-                        
-                    if(code == 758) {
-                        var objId = $(farClass+' .pop_login_user');
-                        message = "帐号已删除";
-                    }                
-                        
-                    if(code == 759) {
-                        var objId = $(farClass+' .pop_login_user');
-                        message = "登录错误次数过多，IP被禁止5分钟";
-                    }
-                     if(code == 757) {
-                            var objId = $(farClass+' .pop_login_user');
-                           // message = "你的账户已被冻结，你可以 1）联系客服处理 或 2）使用密码找回功能解冻";
-                           message = "您的账户存在安全隐患，为确保账户安全，请<a href='fetch_pwd.php'>设置新密码</a>。修改完成后，您将获得一张10元优惠券。";
-                           
-                        }
-                        
-                    if(code == 754 || code == 755) {
-                        $(farClass+' .pop_login_captcha').parent().addClass('inp_error');
-                        $(farClass+' .captcha_error').html(message);
-                    } else{
-                        ERRORSHOW.common_error(objId, message);
-                    }
+                    return false;
                 },'json');
-            } else {
+            }else {
                 if(!passStatus.status) {
-                    ERRORSHOW.common_error($(farClass+' .pop_login_pass'), passStatus.errHtml);
+                    ERRORSHOW.common_error($('#pass_err'), passStatus.errHtml);
                 }
                 if(!userStatus.status) {
-                    ERRORSHOW.common_error($(farClass+' .pop_login_user'), userStatus.errHtml);
+                    ERRORSHOW.common_error($('#user_err'), userStatus.errHtml);
                 }
-                if(!captcha.status) {
-                    $(farClass+' .pop_login_captcha').parent().addClass('inp_error');
-                    $(farClass+' .captcha_error').html( captcha.errHtml);
+                if(!captchaStatus.status) {
+                    ERRORSHOW.common_error($('#captha_err'), captchaStatus.errHtml);
                 } 
                 return false;
             }
         });
-        
+        function clearError() {
+            $('#pass_err').hide();
+            $('#user_err').hide();
+            $('#captha_err').hide();
+        }
+         var ERRORSHOW = {
+            common_error : function(obj, errHtml) {
+                obj.show();
+                obj.html(errHtml);
+            }
+        }
          var CKECK = {
             check_username:function() {
-                var value = $(farClass+' .pop_login_user').attr('value');
+                var value = $('#username').attr('value');
                 var errHtml = '';
                 var status = 0;
                 if(value == '') {
@@ -292,7 +265,7 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
                 return Mes;
             },
             check_password:function() {
-                var value = $(farClass+' .pop_login_pass').attr('value'); 
+                var value = $("#password").attr('value'); 
                 var errHtml = '';
                 var status = 1;
                 if(value == '') {
@@ -312,13 +285,11 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
             check_captcha : function() {
                 var status = 1;
                 var errHtml = '';
-                if($(farClass+' .pop_login_captcha')[0]) {
-                    var value = $(farClass+' .pop_login_captcha').attr('value');
+                    var value = $("#captcha").attr('value');
                     if(value == '') {
                         errHtml = '验证码不能为空';
                         status = 0;
                     }
-                }
                 var Mes = {'status': status, 'errHtml' : errHtml};
                 return Mes;
             }

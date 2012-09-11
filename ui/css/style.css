@@ -79,8 +79,8 @@ a {
     font-size:100%;
     vertical-align:baseline;
     background:transparent;
+    text-decoration:none;
 }
-
 ins {
     background-color:#ff9;
     color:#000;
@@ -665,6 +665,7 @@ fieldset small {
 	background:#eee;
 }
 .box-info {
+        color : red;
 	padding-left: 32px;
 	border-top:1px solid #B8E2FB;
 	border-bottom:1px solid #B8E2FB;

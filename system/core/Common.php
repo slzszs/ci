@@ -559,7 +559,36 @@ if ( ! function_exists('html_escape'))
 		}
 	}
 }
-
-
+if ( ! function_exists('checkPost')) {
+    function checkPost() {
+                foreach($_POST as $key => $val){
+                if(stristr($val,'select') && stristr($val,'from')){
+                        header("Location:hush_index_login.php");
+                        exit();
+                }
+                if(stristr($val,'insert') && stristr($val,'values')){
+                        header("Location:hush_index_login.php");
+                        exit();
+                }
+                if(stristr($val,'delete') && stristr($val,'from')){
+                        header("Location:hush_index_login.php");
+                        exit();
+                }
+                if(stristr($val,'update') && stristr($val,'set')){
+                        header("Location:hush_index_login.php");
+                        exit();
+                }
+                if(stristr($val,'show')){
+                        if (stristr($val,'database') || stristr($val,'table')||stristr($val,'column')){
+                                header("Location:hush_index_login.php");
+                                exit();
+                        }
+                }
+                if(preg_match('/id$/',$key) || preg_match('/page$/',$key)){
+                        $_POST[$key] = intval($val);
+                }
+        }
+     }
+   }
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */
