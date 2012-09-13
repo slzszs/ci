@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <title>后台</title>
-<meta name="description" content="admin" />
-<meta name="keywords" content="Admin,后台" />
+<meta name="description" content="Company Social" />
+<meta name="keywords" content="Company Socialn" />
 <!-- Favicons --> 
 <link rel="shortcut icon" type="image/png" HREF="<?= base_url().CDN_IMG?>favicons/favicon.png"/>
 <link rel="icon" type="image/png" HREF="<?= base_url().CDN_IMG?>favicons/favicon.png"/>
@@ -41,13 +41,7 @@ Default colour scheme is blue. Uncomment prefered stylesheet to use it.
 <!-- Internet Explorer Fixes --> 
 <script type="text/javascript" SRC="<?= base_url().CDN_JS?>comm.js"></script>
 <script type="text/javascript" SRC="<?= base_url().CDN_JS?>flot/jquery.flot.min.js"></script>
-<!--[if IE]>
-<link rel="stylesheet" type="text/css" media="all" href="css/ie.css"/>
-<script src="js/html5.js"></script>
-<![endif]-->
-<!--Upgrade MSIE5.5-7 to be compatible with MSIE8: http://ie7-js.googlecode.com/svn/version/2.1(beta3)/IE8.js -->
-<!--[if lt IE 8]>
-<script src="js/IE8.js"></script>
-<![endif]-->
+<script type="text/javascript" SRC="<?= base_url().CDN_JS?>administry.js"></script>
+
 
 </head>

@@ -11,19 +11,19 @@ $(document).ready(function(){
 
 	/* flot graphs */
 	var sales = [{
-		label: 'Total Paid',
-		data: [[1, 0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,900],[8,0],[9,0],[10,0],[11,0],[12,0]]
+		label: '正常',
+		data: [[1, 0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,29],[8,28],[9,0],[10,0],[11,0],[12,0]]
 	},{
-		label: 'Total Due',
-		data: [[1, 0],[2,0],[3,0],[4,0],[5,0],[6,422.10],[7,0],[8,0],[9,0],[10,0],[11,0],[12,0]]
+		label: '迟到',
+		data: [[1, 0],[2,0],[3,0],[4,0],[5,0],[6,0],[7,1],[8,2],[9,0],[10,0],[11,0],[12,0]]
 	}
 	];
 
 	var plot = $.plot($("#placeholder"), sales, {
 		bars: { show: true, lineWidth: 1 },
 		legend: { position: "nw" },
-		xaxis: { ticks: [[1, "Jan"], [2, "Feb"], [3, "Mar"], [4, "Apr"], [5, "May"], [6, "Jun"], [7, "Jul"], [8, "Aug"], [9, "Sep"], [10, "Oct"], [11, "Nov"], [12, "Dec"]] },
-		yaxis: { min: 0, max: 1000 },
+		xaxis: { ticks: [[1, "1月"], [2, "2月"], [3, "3月"], [4, "4月"], [5, "5月"], [6, "6月"], [7, "7月"], [8, "8月"], [9, "9月"], [10, "10月"], [11, "11月"], [12, "12月"]] },
+		yaxis: { min: 0, max: 31 },
 		grid: { color: "#666" },
 		colors: ["#0a0", "#f00"]			
     });
@@ -53,73 +53,83 @@ $(document).ready(function(){
 				
 					<div class="colgroup leading">
 						<div class="column width3 first">
-							<h3>欢迎 回来, <a href="#"><?= $userInfo['user_name']?></a></h3>
+							<h3><?if ($date) { ?>
+                                                            欢迎 回来, 
+                                                                <? } else{ ?>
+                                                                    欢迎首次来到 CS :
+                                                                            <? } ?><a href="#"><?= $userInfo['user_name']?></a></h3>
 							<p>
-								You are currently signed up to the <b>Free Trial Plan</b>.<br /><a href="#">Upgrade now?</a>
+								你是第1234567位用户
 							</p>
 						</div>
 						<div class="column width3">
+                                                    <?if ($date) {?>
 							<h4>最后登录</h4>
 							<p>
-								Monday July 12th, 2010 at 11:32am from 127.0.0.1<br />
-								No error login attempts.
+								<?= $date['date']?> <?= $date['week']?><br />
+								ip : <?= $date['ip']?>
 							</p>
+                                                        <?}?>
 						</div>
 					</div>
 					
 					<div class="colgroup leading">
 						<div class="column width3 first">
-							<h4>Invoices: <a href="#">10</a></h4>
+							<h4>未收快递: <a href="#">10</a></h4>
 							<hr/>
 							<table class="no-style full">
 								<tbody>
 									<tr>
-										<td>Total Invoices</td>
-										<td class="ta-right"><a href="#">10</a></td>
-										<td class="ta-right">1,322.10 &euro;</td>
+										<td>123123</td>
+										<td class="ta-right"><a href="#">2012/9/12</a></td>
+										<td class="ta-right">收取</td>
 									</tr>
 									<tr>
-										<td>Total Paid</td>
-										<td class="ta-right"><a href="#">9</a></td>
-										<td class="ta-right">900.00 &euro;</td>
+										<td>123123</td>
+										<td class="ta-right"><a href="#">2012/9/12</a></td>
+										<td class="ta-right">收取</td>
 									</tr>
 									<tr>
-										<td>Total Due</td>
-										<td class="ta-right"><a href="#">1</a></td>
-										<td class="ta-right">422.10 &euro;</td>
+										<td>123123</td>
+										<td class="ta-right"><a href="#">2012/9/12</a></td>
+										<td class="ta-right">收取</td>
 									</tr>
 									<tr>
-										<td>Total Overdue</td>
-										<td class="ta-right">0</td>
-										<td class="ta-right">0.00 &euro;</td>
+										<td>123123</td>
+										<td class="ta-right"><a href="#">2012/9/12</a></td>
+										<td class="ta-right">收取</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 						<div class="column width3">
-							<h4>Sales: <a href="#">1</a></h4>
+							<h4>未完成备注: <a href="#">10</a></h4>
 							<hr/>
 							<table class="no-style full">
 								<tbody>
 									<tr>
-										<td>Clients This Month</td>
-										<td class="ta-right"><a href="#">1</a></td>
-										<td class="ta-right"></td>
+										<td>9:00</td>
+										<td class="ta-right"><a href="#">开会</a></td>
+                                                                                <td class="ta-right">stone</td>
+										<td class="ta-right">完成</td>
 									</tr>
 									<tr>
-										<td>Sales This Month</td>
-										<td class="ta-right"><a href="#">9</a></td>
-										<td class="ta-right">900.00 &euro;</td>
+										<td>10:00</td>
+										<td class="ta-right"><a href="#">webcaht</a></td>
+                                                                                <td class="ta-right">UED</td>
+										<td class="ta-right">完成</td>
 									</tr>
 									<tr>
-										<td>Clients Total</td>
-										<td class="ta-right"><a href="#">5</a></td>
-										<td class="ta-right"></td>
+										<td>11:00</td>
+										<td class="ta-right"><a href="#">开会</a></td>
+                                                                                <td class="ta-right">stone</td>
+										<td class="ta-right">完成</td>
 									</tr>
 									<tr>
-										<td>Sales Total</td>
-										<td class="ta-right"><a href="#">9</a></td>
-										<td class="ta-right">900.00 &euro;</td>
+										<td>12:00</td>
+										<td class="ta-right"><a href="#">开会</a></td>
+                                                                                <td class="ta-right">stone</td>
+										<td class="ta-right">完成</td>
 									</tr>
 								</tbody>
 							</table>
@@ -128,22 +138,22 @@ $(document).ready(function(){
 				
 					<div class="colgroup leading">
 						<div class="column width3 first">
-							<h4>Client Stats</h4>
+							<h4>备注完成</h4>
 							<hr/>
 							<table class="no-style full">
 								<tbody>
 									<tr>
-										<td>Active</td>
+										<td>已完成</td>
 										<td class="ta-right">1/5</td>
 										<td><div id="progress1" class="progress full progress-green"><span><b></b></span></div></td>
 									</tr>
 									<tr>
-										<td>Pending</td>
+										<td>未完成</td>
 										<td class="ta-right">2/5</td>
 										<td><div id="progress2" class="progress full progress-blue"><span><b></b></span></div></td>
 									</tr>
 									<tr>
-										<td>Suspended</td>
+										<td>忽略</td>
 										<td class="ta-right">2/5</td>
 										<td><div id="progress3" class="progress full progress-red"><span><b></b></span></div></td>
 									</tr>
@@ -151,36 +161,34 @@ $(document).ready(function(){
 							</table>
 						</div>
 						<div class="column width3">
-							<h4>Reports</h4>
+							<h4>出勤率</h4>
 							<hr/>
-							<p><b>Sales this year</b></p>
+							<p><b>考勤</b></p>
 							<div id="placeholder" style="height:100px"></div>
 						</div>
 					</div>
 					<div class="clear">&nbsp;</div>
 				
 				</section>
-				<!-- End of Left column/section -->
-				
-				<!-- Right column/section -->
+
 				<aside class="column width2">
 					<div id="rightmenu">
 						<header>
-							<h3>Your Account</h3>
+							<h3>最近操作</h3>
 						</header>
 						<dl class="first">
 							<dt><img width="16" height="16" alt="" SRC="img/key.png"></dt>
-							<dd><a href="#">Administry (admin)</a></dd>
-							<dd class="last">Free Account.</dd>
+							<dd><a href="#">添加了3个备注</a></dd>
+							<dd class="last">点击查看详情</dd>
 							
 							<dt><img width="16" height="16" alt="" SRC="img/help.png"></dt>
-							<dd><a href="#">Support</a></dd>
-							<dd class="last">Documentation and FAQ</dd>
+							<dd><a href="#">添加一个会议邀请</a></dd>
+							<dd class="last">点击查看详情</dd>
 						</dl>
 					</div>
 					<div class="content-box">
 						<header>
-							<h3>Latest in the Community</h3>
+							<h3>快速备注</h3>
 						</header>
 						<section>
 							<dl>
@@ -192,6 +200,7 @@ $(document).ready(function(){
 						</section>
 					</div>
 				</aside>
+                         
 				<!-- End of Right column/section -->
 				
 		</div>

@@ -461,7 +461,13 @@ fieldset small {
 	font-size:11px;
 	display: block;
 }
-
+/* */
+.browseButton {
+    height: 45px;
+    overflow: hidden;
+    position: relative;
+    width: 64px;
+}
 /* Grids
 ---------------------------------------------------------------------*/
 
@@ -785,10 +791,12 @@ header#top aside a{
 	text-align:right;
 }
 #topnav img.avatar {
+        width:35px;
+        height:35px;
 	background:#fff;
 	float:right;
 	margin:5px 0 0 8px;
-	padding:4px;
+	padding:1px;
 }
 
 /* Main menu

@@ -4,11 +4,13 @@ class Login extends CI_Controller {
 
     private $session_var = 'sessionnum';
     private $session_userInfo = 'userInfo';
+    private $session_userId = 'session_use_id';
     public function __construct() {
         parent::__construct();
     }
 
     public function index($page = 'login') {
+        $this->purview->checkLoginStatus(true, 'home/');
         $helperArr = array('url');
         $this->load->helper($helperArr);
         $data['img'] = $this->getCaptha();
@@ -16,7 +18,11 @@ class Login extends CI_Controller {
         $this->load->view('login', $data);
         $this->load->view('comm/footer');
     }
-
+    public function loginOut() {
+        $session_arr = array($this->session_userInfo, $this->session_userId);
+        $this->session->unset_userdata($session_arr);
+        $this->purview->checkLoginStatus();
+    }
     public function doLogin() {
         checkPost();
         $this->load->library('err_message');
@@ -53,6 +59,7 @@ class Login extends CI_Controller {
                          );
             $this->user_model->insertUserLoginLog($loginLog);
             $this->session->set_userdata($this->session_userInfo, $userInfo);
+            $this->session->set_userdata($this->session_userId, $userInfo['user_id']);
             return $this->err_message->_output(200);
         }
     }

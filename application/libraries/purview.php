@@ -3,15 +3,23 @@
 class Purview {
     
     public function __construct() {
-        $this->checkLoginStatus();
+        
     }
     
-    public function checkLoginStatus() {
+    public function checkLoginStatus($isLogin = 0, $rurl = '') {
         $CI =& get_instance();
         $userInfo = $CI->session->userdata('userInfo');
-        if(!$userInfo) {
-            header('Location : ./index.php/login');
+        if(!$userInfo && !$isLogin) {
+            header("Location: ".base_url());
+            exit;
+        } 
+        else if($userInfo) {
+            if($rurl) {
+                header("Location: ".base_url()."index.php/$rurl");
+                exit;
+            }
         }
     }
-}
+}   $CI =& get_instance();
+     
 ?>

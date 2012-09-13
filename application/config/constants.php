@@ -36,13 +36,15 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
-
-
 //网站CSS CDN域名
 define("CDN_CSS","/ui/css/");
 //网站IMAGE CDN域名
 define("CDN_IMG","/ui/img/");
 //网站js CDN域名
 define("CDN_JS","/ui/js/");
+//网站flash CDN域名
+define("CDN_FLASH","/ui/flash/");
+//网站 用户头像存放地址
+define("CDN_AVATAR","/upload/avatar/");
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

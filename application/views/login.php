@@ -4,7 +4,7 @@
 	<header id="top">
 		<div class="wrapper-login">
 			<!-- Title/Logo - can use text instead of image -->
-			<div id="title"><img SRC="<?= base_url().CDN_IMG?>logo.png" alt="Administry" /><!--<span>Administry</span> demo--></div>
+			<div id="title"><img SRC="logo.png" alt="Company Social" /><!--<span>Administry</span> demo--></div>
 			<!-- Main navigation -->
 			<nav id="menu">
 				<ul class="sf-menu">
@@ -243,4 +243,3 @@
             }
         };
 </script>
-</html>
