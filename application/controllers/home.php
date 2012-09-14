@@ -1,6 +1,6 @@
 <?php
 class Home extends CI_Controller {
-    
+    private $pageType = 'home';
     public function __construct() {
         parent::__construct();
         $this->purview->checkLoginStatus();
@@ -9,6 +9,7 @@ class Home extends CI_Controller {
         $this->load->model('user_model');
         $data = $this->comm_data->appendSystemData();
         $data['date'] = $this->_getUserLasterLog();
+        $data['pageType'] = $this->pageType;
         $this->load->view('comm/header');   
         $this->load->view('home', $data);
         $this->load->view('comm/footer');

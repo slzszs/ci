@@ -1,5 +1,6 @@
 <?php
     class Userset extends CI_Controller {
+        private $pageType = 'userset';
         public function __construct() {
             parent::__construct();
             $this->purview->checkLoginStatus();
@@ -8,6 +9,7 @@
         
         public function index() {
             $data = $this->comm_data->appendSystemData();
+            $data['pageType'] = $this->pageType;
             $this->load->view('comm/header');
             $this->load->view('userset', $data);
             $this->load->view('comm/footer');

@@ -15,15 +15,15 @@
 			<!-- Main navigation -->
 			<nav id="menu">
 				<ul class="sf-menu">
-					<li class="current"><a HREF="<?= base_url()?>index.php/home">工作台</a></li>
-					<li>
-						<a HREF="styles.html">通讯录</a>
+                                    <li  <?if($pageType == 'home') { ?>class="current" <? } ?>><a HREF="<?= base_url()?>index.php/home">工作台</a></li>
+					<li <?if($pageType == 'address_book') { ?>class="current" <? } ?> >
+						<a HREF="<?= base_url()?>index.php/addressbook">通讯录</a>
 						<ul>
 							<li>
-								<a HREF="styles.html">公司通讯录</a>
+								<a HREF="<?= base_url()?>index.php/addressbook/index/1">公司通讯录</a>
 							</li>
 							<li>
-								<a href="#">个人通讯录</a>
+								<a href="<?= base_url()?>index.php/addressbook/index/2">个人通讯录</a>
 								<!--<ul>
 									<li><a HREF="samples-files.html">Files</a></li>
 									<li><a HREF="samples-products.html">Products</a></li>

@@ -46,5 +46,7 @@ define("CDN_JS","/ui/js/");
 define("CDN_FLASH","/ui/flash/");
 //网站 用户头像存放地址
 define("CDN_AVATAR","/upload/avatar/");
+//网站 用户上传CSV地址
+define("CDN_CSV","./upload/csv/");
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

@@ -228,110 +228,9 @@ $(document).ready(function(){
                                                         <p class="box"><input type="button" onclick="ajaxFileUpload()" class="btn btn-green big" id="img_sub" value="提交"/>  <input type="reset" class="btn reset_but" value="取消"/></p>
                                                         
                                         </fieldset>
-					<h3>Form elements</h3>
 					
-					<h5>Step 1/6</h5>
-					<div id="progress1" class="progress full progress-green"><span><b></b></span></div>
-					
-					<form id="sampleform2" method="post" action="#" onsubmit="return false;">
-
-						<fieldset>
-							<legend>Error message</legend>
-							<div class="box box-error">Invalid credit card info</div>
-							<div class="box box-error-msg">
-								<ol>
-									<li>Credit card number entered is invalid</li>
-									<li>Credit card verification number must be a valid number</li>
-								</ol>
-							</div>
-						</fieldset>
 						
-						<fieldset>
-							<legend>Text fields</legend>
-								<p>
-									<label for="input2">Big title:</label><br/>
-									<input type="text" id="input2" class="half title" value="" name="input2"/>
-									<small>class="half title"</small>
-								</p>
-								<p>
-									<label for="input1">Full textbox:</label><br/>
-									<input type="text" id="input1" class="full" value="" name="input1"/>
-									<small>class="full"</small>
-								</p>
-						</fieldset>
 						
-						<fieldset>
-							<legend>Text area</legend>
-							<p>
-								<label for="area1">Small textarea:</label><br/>
-								<textarea id="area1" class="small" name="area1"></textarea>
-								<small>class="small"</small>
-							</p>
-							<p>
-								<label for="area1">Medium textarea:</label><br/>
-								<textarea id="area2" class="medium half" name="area2"></textarea>
-								<small>class="medium half"</small>
-							</p>
-							<p>
-								<label for="area1">Large textarea:</label><br/>
-								<textarea id="area3" class="large full" name="area3"></textarea>
-								<small>class="large full"</small>
-							</p>
-						</fieldset>
-						
-						<fieldset>
-							<legend>Selections</legend>
-							<div class="clearfix">
-								<div class="column width3 first">									
-									<p>
-										<label>Radio buttons:</label><br/>
-										<input type="radio" id="rb1" class="" value="" name="rb"/>
-										<label class="choice" for="rb1">Lorem ipsum dolor sit amet</label><br/>
-										<input type="radio" id="rb2" class="" value="" name="rb"/>
-										<label class="choice" for="rb2">Lorem ipsum dolor sit amet</label>
-									</p>
-									<p>
-										<label for="select1">Single selection:</label><br/>
-										<select id="select1" class="half" name="select1">
-											<option value="1">Lorem</option>
-											<option value="2">Ipsum</option>
-											<option value="3">Dolor</option>
-											<option value="4">Sit</option>
-											<option value="5">Amet</option>
-										</select>
-									</p>
-								</div>
-								<div class="column width3">
-									<p>
-										<label>Check boxes:</label><br/>
-										<input type="checkbox" id="cb1" class="" value="" name="cb"/>
-										<label class="choice" for="cb1">Lorem ipsum dolor sit amet</label><br/>
-										<input type="checkbox" id="cb2" class="" value="" name="cb"/>
-										<label class="choice" for="cb2">Lorem ipsum dolor sit amet</label>
-									</p>
-									<p>
-										<label for="select2">Multiple selection:</label><br/>
-										<select id="select2" class="half" multiple="multiple" size="6" name="select2">
-											<optgroup label="Set 1">
-												<option value="1" selected>Lorem</option>
-												<option value="2">Ipsum</option>
-											</optgroup>
-											<optgroup label="Set 2">
-												<option value="3">Dolor</option>
-												<option value="4">Sit</option>
-												<option value="5">Amet</option>
-											</optgroup>
-										</select>
-									</p>
-								</div>
-							</div>
-						</fieldset>
-						
-						<fieldset>
-							<legend>Buttons</legend>
-							<label>Some combinations</label>
-							<p class=""><input type="submit" class="btn btn-green big" value="Big green"/> <input type="submit" class="btn btn-red" value="Standard red"/> or <input type="reset" class="btn" value="Simple gray"/></p>
-						</fieldset>
 						
 					</form>
 				
@@ -345,11 +244,11 @@ $(document).ready(function(){
 							<h3>You might also want to check out...</h3>
 						</header>
 						<dl class="first">
-							<dt><img width="16" height="16" alt="Basic styles" SRC="img/style.png"></dt>
+							<dt><img width="16" height="16" alt="Basic styles" SRC="<?= base_url().CDN_IMG?>style.png"></dt>
 							<dd><a HREF="styles.html">Basic styles</a></dd>
 							<dd class="last">Basic elements and styles</dd>							
 							
-							<dt><img width="16" height="16" alt="Form validation" SRC="img/book.png"></dt>
+							<dt><img width="16" height="16" alt="Form validation" SRC="<?= base_url().CDN_IMG?>book.png"></dt>
 							<dd><a HREF="../../docs.jquery.com/Plugins/Validation">Form validation</a></dd>
 							<dd class="last">jQuery form validation documentation</dd>							
 						</dl>
